@@ -1,2 +1,2 @@
 # Dale
-Dale is CHIP-8 emulator written in Rust.
+Dale is a CHIP-8 emulator written in Rust.
