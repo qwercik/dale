@@ -13,7 +13,7 @@ fn main() {
     let arguments: Vec<String> = env::args().collect();
     match Config::parse(&arguments) {
         Ok(config) => {
-            let vm = VirtualMachine::new(config);
+            let mut vm = VirtualMachine::new(config);
             vm.run();
         },
         Err(_) => {
