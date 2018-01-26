@@ -4,3 +4,4 @@ version = "0.1.0"
 authors = ["Eryk Andrzejewski <erykandrzejewski@gmail.com>"]
 
 [dependencies]
+sfml = "0.14.0"

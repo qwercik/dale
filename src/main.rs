@@ -1,3 +1,5 @@
+extern crate sfml;
+
 mod config;
 mod vm;
 

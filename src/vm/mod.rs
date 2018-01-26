@@ -2,6 +2,7 @@ use config::Config;
 
 pub struct VirtualMachine {
     config: Config,
+
 }
 
 impl VirtualMachine {
