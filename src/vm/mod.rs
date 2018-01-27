@@ -6,13 +6,13 @@ use sfml::window::*;
 use config::Config;
 use self::display::Display;
 
-pub struct VirtualMachine {
+pub struct VirtualMachine<'a> {
     config: Config,
-    display: Display,
+    display: Display<'a>,
 }
 
-impl VirtualMachine {
-    pub fn new(config: Config) -> VirtualMachine {
+impl<'a> VirtualMachine<'a> {
+    pub fn new(config: Config) -> VirtualMachine<'a> {
         let display = Display::new();
 
         VirtualMachine { config, display }
@@ -28,9 +28,6 @@ impl VirtualMachine {
             &Default::default(),
         );
         window.set_framerate_limit(60);
-
-
-        self.display.set_pixel(10, 10, true);
 
         loop {
             while let Some(event) = window.poll_event() {
