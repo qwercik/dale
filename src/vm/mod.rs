@@ -1,15 +1,26 @@
+mod display;
+
 use sfml::graphics::*;
 use sfml::window::*;
 
 use config::Config;
+use self::display::Display;
 
 pub struct VirtualMachine {
     config: Config,
-    window: RenderWindow,
+    display: Display,
 }
 
 impl VirtualMachine {
     pub fn new(config: Config) -> VirtualMachine {
+        let display = Display::new();
+
+        VirtualMachine { config, display }
+    }
+
+    pub fn run(&mut self) {
+        println!("Running ROM {}", self.config.get_rom_filename());
+
         let mut window = RenderWindow::new(
             (640, 320),
             "Dale",
@@ -19,22 +30,18 @@ impl VirtualMachine {
         window.set_framerate_limit(60);
 
 
-        VirtualMachine { config, window }
-    }
-
-    pub fn run(&mut self) {
-        println!("Running ROM {}", self.config.get_rom_filename());
+        self.display.set_pixel(10, 10, true);
 
         loop {
-            while let Some(event) = self.window.poll_event() {
+            while let Some(event) = window.poll_event() {
                 match event {
                     Event::Closed => return,
                     _ => continue,
                 }
             }
 
-            self.window.clear(&Color::BLACK);
-            self.window.display();
+            window.clear(&Color::BLACK);
+            window.display();
         }
     }
 }
