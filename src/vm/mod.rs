@@ -20,14 +20,27 @@ impl<'a> VirtualMachine<'a> {
 
     pub fn run(&mut self) {
         println!("Running ROM {}", self.config.get_rom_filename());
-
+        
+        let window_resolution = (
+            (display::RESOLUTION.0 * display::PIXEL_SIZE as usize) as u32,
+            (display::RESOLUTION.1 * display::PIXEL_SIZE as usize) as u32,
+        );
         let mut window = RenderWindow::new(
-            (640, 320),
+            window_resolution,
             "Dale",
             Style::CLOSE,
             &Default::default(),
         );
         window.set_framerate_limit(60);
+        
+        // Test of display
+        for y in 0..display::RESOLUTION.1 {
+            for x in 0..display::RESOLUTION.0 {
+                if (y % 2) != (x % 2) {
+                    self.display.set_pixel(x, y, true);
+                }
+            }
+        }
 
         loop {
             while let Some(event) = window.poll_event() {
@@ -38,6 +51,7 @@ impl<'a> VirtualMachine<'a> {
             }
 
             window.clear(&Color::BLACK);
+            self.display.render(&mut window); 
             window.display();
         }
     }
