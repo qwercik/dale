@@ -2,16 +2,13 @@ pub struct Config {
     rom_filename: String,
 }
 
-pub enum ParseError {
-    InvalidArgumentsAmount,
-}
 
-pub type ConfigResult = Result<Config, ParseError>;
+pub type ConfigResult = Result<Config, String>;
 
 impl Config {
     pub fn parse(arguments: &[String]) -> ConfigResult {
         if arguments.len() != 2 {
-            return Err(ParseError::InvalidArgumentsAmount);
+            return Err(String::from("Invalid arguments amount"));
         }
         
         let rom_filename = arguments[1].clone();

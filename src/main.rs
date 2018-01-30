@@ -16,8 +16,8 @@ fn main() {
             let mut vm = VirtualMachine::new(config);
             vm.run();
         },
-        Err(_) => {
-            eprintln!("Incorrect usage!");
+        Err(error) => {
+            eprintln!("Error: {}", error);
             eprintln!("Use: dale file.rom");
         }
     };
