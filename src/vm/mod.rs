@@ -22,8 +22,8 @@ impl<'a> VirtualMachine<'a> {
         println!("Running ROM {}", self.config.get_rom_filename());
         
         let window_resolution = (
-            (display::RESOLUTION.0 * display::PIXEL_SIZE as usize) as u32,
-            (display::RESOLUTION.1 * display::PIXEL_SIZE as usize) as u32,
+            (display::RESOLUTION.0 * display::pixel::SIZE as usize) as u32,
+            (display::RESOLUTION.1 * display::pixel::SIZE as usize) as u32,
         );
         let mut window = RenderWindow::new(
             window_resolution,
