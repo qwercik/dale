@@ -38,6 +38,23 @@ impl<'a> Display<'a> {
         }
     }
     
+    pub fn draw_sprite(&mut self, position_x: usize, position_y: usize, sprite: &[u8]) -> bool {
+        let mut collision = false;
+
+        for y in 0..sprite.len() {
+            for x in 0..8 {
+                let state = self.set_pixel(x + position_x, y + position_y, sprite[y] & (1 << x) != 0);
+
+                if state {
+                    collision = true;
+                }
+            }
+        }
+
+        collision
+    }
+
+
     pub fn render(&self, mut window: &mut RenderWindow) {
         for row in &self.pixels {
             for pixel in row {
